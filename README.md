@@ -1,5 +1,7 @@
 # Knife::Role::Test
 
+[![Build Status](https://travis-ci.org/amdprophet/knife-role-test.png?branch=master)](https://travis-ci.org/amdprophet/knife-role-test)
+
 A Chef knife plugin to validate roles
 
 ## Installation
