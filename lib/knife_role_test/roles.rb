@@ -11,7 +11,7 @@ class TestRoles < MiniTest::Unit::TestCase
   @role_path = ENV['KRT_ROLE_PATH']
 
   def setup
-    lib_dir = Pathname.new(@role_path.to_s).realpath.to_s + '/lib'
+    lib_dir = Pathname.new(ENV['KRT_ROLE_PATH']).realpath.parent.to_s + '/lib'
     $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
     @loader = Chef::Knife::Core::ObjectLoader.new(Chef::Role, nil)
   end

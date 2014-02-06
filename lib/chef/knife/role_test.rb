@@ -1,4 +1,5 @@
 require 'chef/knife'
+require 'open3'
 
 class Chef
   class Knife
@@ -31,8 +32,14 @@ class Chef
         test_path = "#{::KnifeRoleTest.root}/lib/knife_role_test/roles.rb"
         env_vars = {
           "KRT_ROLE_PATH" => Chef::Config[:role_path]
-        }.map { |var, val| "#{var}=#{val}" }.join(" ")
-        exec "#{env_vars} #{test_path}", *test_args
+        }
+        Open3.popen3(env_vars, test_path, *test_args) do |stdin, stdout, stderr, wait_thr|
+          stderr_text = stderr.read
+          stdout_text = stdout.read
+          puts stderr_text
+          puts stdout_text
+          stdout_text
+        end
       end
     end
   end
